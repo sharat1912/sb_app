@@ -55,7 +55,6 @@ public class CounsellorController {
 		return "redirect:/";
 	}
 	
-	
 	@PostMapping("/login")
 	public String handleLogin(CounsellorEntity counsellor,HttpServletRequest req ,Model model) {
 		CounsellorEntity c = counsellorservice.getCounsellor(counsellor.getEmail(), counsellor.getPwd());
