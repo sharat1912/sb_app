@@ -1,10 +1,11 @@
 # Use OpenJDK base image to build and run the application
 FROM openjdk:17-jdk-slim
 
-# Install necessary dependencies for Maven
+# Install required dependencies (including Maven and utilities like curl, gnupg, ca-certificates)
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
+    gnupg \
     maven \
     && apt-get clean
 
