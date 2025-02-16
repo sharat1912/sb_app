@@ -1,16 +1,5 @@
-# Use OpenJDK base image to build and run the application
-FROM openjdk:17-jdk-slim
-
-# Install required dependencies (including Maven and utilities like curl, gnupg, ca-certificates)
-RUN apt-get update && apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    maven \
-    && apt-get clean
-
-# Verify Maven installation (for debugging purposes)
-RUN mvn -v
+# Use Maven base image with OpenJDK to build and run the application
+FROM maven:3.8.1-openjdk-17
 
 # Set the working directory inside the container
 WORKDIR /app
