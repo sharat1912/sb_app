@@ -1,13 +1,11 @@
-FROM maven:3.8.1-openjdk-17
+# Use OpenJDK base image
+FROM openjdk:17
 
-WORKDIR /app
-
-COPY pom.xml .
-
-COPY src ./src
-
-RUN mvn clean package -DskipTests
-
+# Expose port 8080 for the application
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/target/Counselor-app-0.0.1-SNAPSHOT.jar"]
+# Copy the JAR file from the target directory into the Docker container
+COPY target/Counselor-app-0.0.1-SNAPSHOT.jar /Counselor-app-0.0.1-SNAPSHOT.jar
+
+# Run the application with the correct JAR file
+ENTRYPOINT ["java", "-jar", "/Counselor-app-0.0.1-SNAPSHOT.jar"]
