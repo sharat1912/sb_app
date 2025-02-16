@@ -1,11 +1,11 @@
 # Use OpenJDK base image
-FROM openjdk:17-jdk-slim
+FROM openjdk:17
 
-# Install necessary dependencies and Maven from the official Apache source
+# Install dependencies and Maven
 RUN apt-get update && apt-get install -y \
     curl \
-    gnupg \
     ca-certificates \
+    gnupg \
     && curl -fsSL https://dlcdn.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz -o /tmp/apache-maven-3.8.1-bin.tar.gz \
     && tar -xzf /tmp/apache-maven-3.8.1-bin.tar.gz -C /opt \
     && ln -s /opt/apache-maven-3.8.1/bin/mvn /usr/bin/mvn \
