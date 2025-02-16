@@ -1,15 +1,21 @@
 # Use OpenJDK base image
 FROM openjdk:17-jdk-slim
 
-# Install Maven and dependencies
+# Install necessary dependencies and Maven from the official Apache source
 RUN apt-get update && apt-get install -y \
     curl \
-    ca-certificates \
     gnupg \
-    maven \
+    ca-certificates \
+    && curl -fsSL https://dlcdn.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.tar.gz -o /tmp/apache-maven-3.8.1-bin.tar.gz \
+    && tar -xzf /tmp/apache-maven-3.8.1-bin.tar.gz -C /opt \
+    && ln -s /opt/apache-maven-3.8.1/bin/mvn /usr/bin/mvn \
+    && rm -rf /tmp/* \
     && apt-get clean
 
-# Set working directory inside the container
+# Verify Maven installation
+RUN mvn -v
+
+# Set the working directory inside the container
 WORKDIR /app
 
 # Copy the Maven project files into the container
